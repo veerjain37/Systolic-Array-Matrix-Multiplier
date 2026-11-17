@@ -46,7 +46,9 @@ always @(posedge clk ) begin
         stream,drain: begin
                      count<= count + 1'b1;
            end 
-            default: 
+            default: begin
+                count<=0;
+            end
         endcase
     end
 end
@@ -113,6 +115,7 @@ always @(*) begin
         next_state=idle;
         
        end 
+       default: ;
        
     endcase
 end

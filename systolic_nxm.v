@@ -1,6 +1,7 @@
 module systolic_nxm #(parameter width=8, parameter rows=3 , parameter cols=3) (
     input clk,
     input reset,
+    input pe_en,
     input [(width*rows)-1:0] a,
     input [(width*cols)-1:0] b,
     output [((2*width + $clog2(cols))*rows*cols)-1:0] sum 
@@ -21,6 +22,7 @@ generate
                 .sum_width(sum_width) 
             ) pe( .clk(clk),
                    .reset(reset),
+                   .pe_en(pe_en),
                    .a_in((c==0)? a[(width*r) +: width]: wa[r][c-1]),
                    .b_in((r==0)? b[(width*c) +: width] : wb[r-1][c]),
                    .a_out(wa[r][c]),
